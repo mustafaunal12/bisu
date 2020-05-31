@@ -1,16 +1,54 @@
-version: '3.3'
+version: "3.5"
 services:
- mysql:
-  image: mysql:latest
-  container_name: 'mysql'
-  volumes:
-    - ./.docker/database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql:ro
-    - ./.docker/database/data.sql:/docker-entrypoint-initdb.d/2-data.sql:ro
-  restart: always
-  environment:
-    MYSQL_USER: admin
-    MYSQL_PASSWORD: 123
-    MYSQL_ROOT_PASSWORD: bisu123!
-    MYSQL_DATABASE: bisu
-  ports:
-    - 3306:3306
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    volumes:
+      - ./.docker/database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql:ro
+      - ./.docker/database/data.sql:/docker-entrypoint-initdb.d/2-data.sql:ro
+    restart: always
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: bisu123!
+      MYSQL_DATABASE: bisu
+    ports:
+      - 3306:3306
+    networks:
+      - bisu
+  # ui:
+  #   restart: always
+  #   image: ui
+  #   build: 
+  #     context: ./
+  #     dockerfile: Infrastructure/Apps/UI/Dockerfile
+  #   container_name: ui
+  #   networks: 
+  #     - bisu
+  #   ports: 
+  #     - 8080:80
+  api:
+    restart: always
+    image: api
+    env_file:
+      - ./bisu.env
+    build: 
+      context: ./
+      dockerfile: Infrastructure/Apps/Api/Dockerfile
+    container_name: api
+    hostname: api
+    volumes: 
+      - ./Infrastructure/Apps/Api:/usr/app/bisu/Infrastructure/Apps/Api:cached
+      - /usr/app/bisu/Infrastructure/Apps/Api/node_modules/
+      - ./Core:/usr/app/bisu/Core:cached
+      - /usr/app/bisu/Core/node_modules/
+    networks: 
+      - bisu
+    ports: 
+      - 8081:8081
+      - 9231:9231
+    depends_on:
+      - mysql
+networks:
+  bisu:
+    name: bisu-network
