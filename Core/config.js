@@ -1,4 +1,6 @@
 module.exports = {
-    environment: process.env.ENVIRONMENT,
-    appName: process.env.APPNAME
+	elasticsearch: process.env.ELASTICSEARCH,
+	environment: process.env.ENVIRONMENT,
+	appName: process.env.APPNAME,
+	logger: process.env.LOGGER
 };

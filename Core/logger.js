@@ -1,7 +1,8 @@
 const bunyan = require('bunyan');
+var Elasticsearch = require('bunyan-elasticsearch');
 const fs = require('fs');
 
-const { appName } = require('./config');
+const { elasticsearch, logger, appName, environment } = require('./config');
 
 // create logs directory if not exists.
 fs.existsSync('logs') || fs.mkdirSync('logs');
@@ -29,4 +30,37 @@ const fileLogger = bunyan.createLogger({
 	}]
 });
 
-module.exports = fileLogger;
+//Elasticsearch settings
+var esStream = new Elasticsearch({
+	indexPattern: 'logs-bisu',
+	index: 'logs-bisu',
+	type: 'logs',
+	host: elasticsearch,
+});
+
+esStream.on('error', function (err) {
+	// eslint-disable-next-line no-console
+	console.log('Elasticsearch is not available. ', err);
+});
+
+const esLogger = bunyan.createLogger({
+	name: appName,
+	environment: environment,
+	serializers: bunyan.stdSerializers
+});
+
+const addStream = (logger, stream) => {
+	try {
+		logger.addStream({
+			stream,
+			name: 'Elastic',
+			level: 'info'
+		});
+		return logger;
+	} catch (err) {
+		fileLogger.error(err);
+		return fileLogger;
+	}
+};
+
+module.exports = logger === 'file' ? fileLogger : addStream(esLogger, esStream);

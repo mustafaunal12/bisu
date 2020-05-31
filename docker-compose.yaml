@@ -1,5 +1,36 @@
 version: "3.5"
 services:
+  elasticsearch:
+    image: elasticsearch:7.4.2
+    container_name: elasticsearch
+    environment:
+      - cluster.name=bisu-cluster
+      - node.name=elasticsearch
+      - cluster.initial_master_nodes=elasticsearch
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - bisu
+  kibana:
+    image: kibana:7.4.2
+    container_name: kibana
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - bisu
   mysql:
     image: mysql:latest
     container_name: mysql
@@ -16,39 +47,44 @@ services:
       - 3306:3306
     networks:
       - bisu
-  # ui:
-  #   restart: always
-  #   image: ui
-  #   build: 
-  #     context: ./
-  #     dockerfile: Infrastructure/Apps/UI/Dockerfile
-  #   container_name: ui
-  #   networks: 
-  #     - bisu
-  #   ports: 
-  #     - 8080:80
   api:
     restart: always
     image: api
     env_file:
       - ./bisu.env
-    build: 
+    build:
       context: ./
       dockerfile: Infrastructure/Apps/Api/Dockerfile
     container_name: api
     hostname: api
-    volumes: 
+    volumes:
       - ./Infrastructure/Apps/Api:/usr/app/bisu/Infrastructure/Apps/Api:cached
       - /usr/app/bisu/Infrastructure/Apps/Api/node_modules/
       - ./Core:/usr/app/bisu/Core:cached
       - /usr/app/bisu/Core/node_modules/
-    networks: 
+    networks:
       - bisu
-    ports: 
+    ports:
       - 8081:8081
       - 9231:9231
     depends_on:
       - mysql
+      - elasticsearch
+      - kibana
+  # ui:
+  #   restart: always
+  #   image: ui
+  #   build:
+  #     context: ./
+  #     dockerfile: Infrastructure/Apps/UI/Dockerfile
+  #   container_name: ui
+  #   networks:
+  #     - bisu
+  #   ports:
+  #     - 8080:80
 networks:
   bisu:
     name: bisu-network
+volumes:
+  esdata:
+    driver: local

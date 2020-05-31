@@ -11,12 +11,12 @@ const responseHandler = function (req, res, next) {
 			res.json(400, { message: customizeArgumentRequiredError(ex) }) :
 			res.json(500, { message: responseCodeDescriptions[responseCodes.fatal_error] });
 	};
-	res.success = function (responseObject) {
-		res.json(200, responseObject);
-	};
-	res.error = function (responseObject) {
-		logger.warn(responseObject);
-		res.json(responseObject.responseCode, { message: responseObject.responseMessage });
+	res.handle = function (responseObject) {
+		const { success, responseCode, data } = responseObject;
+
+		success ?
+			res.json(200, data) :
+			res.json(responseCode, { message: responseCodeDescriptions[responseCode] });
 	};
 	next();
 };
