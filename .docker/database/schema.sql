@@ -1,3 +1,6 @@
+ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'bisu123!';
+flush privileges;
+
 use bisu;
 
 DROP TABLE IF EXISTS orderProducts;
@@ -24,7 +27,7 @@ CREATE TABLE orders (
     deliveryDate DATETIME NOT NULL,
     paymentMethod VARCHAR(100) NOT NULL,
     totalAmount DECIMAL(13,2) NOT NULL,
-    status VARCHAR(50) NOT NULL,
+    status INT NOT NULL,
     PRIMARY KEY (orderId),
     FOREIGN KEY (subscriptionId) REFERENCES subscriptions (subscriptionId)
 );

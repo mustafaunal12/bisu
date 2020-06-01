@@ -58,10 +58,14 @@ services:
     container_name: api
     hostname: api
     volumes:
+      - ./:/usr/app/bisu:cached
+      - /usr/app/bisu/node_modules/
       - ./Infrastructure/Apps/Api:/usr/app/bisu/Infrastructure/Apps/Api:cached
       - /usr/app/bisu/Infrastructure/Apps/Api/node_modules/
       - ./Core:/usr/app/bisu/Core:cached
       - /usr/app/bisu/Core/node_modules/
+      - ./Infrastructure/Data:/usr/app/bisu/Infrastructure/Data:cached
+      - /usr/app/bisu/Infrastructure/Data/node_modules/
     networks:
       - bisu
     ports:

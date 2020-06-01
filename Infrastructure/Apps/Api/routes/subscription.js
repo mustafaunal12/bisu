@@ -1,11 +1,17 @@
 var router = require('express').Router();
 
 const coreLayer = require('../../../../Core/index');
-const logger = coreLayer.logger;
+const dataLayer = require('../../../Data/index');
 
-router.post('/:subscriptionId', function (req, res, next) {
+const logger = coreLayer.logger;
+const subscriptionDataAccess = dataLayer.models.subscription;
+
+const subscriptionService = coreLayer.service.subscription({ subscriptionDataAccess });
+
+router.post('/:phoneNumber', async function (req, res, next) {
 	try {
-		console.log('getSubscriptionOrders', req.params.subscriptionId);
+		const response = await subscriptionService.get(req.params.phoneNumber);
+		res.handle(response);
 	} catch (ex) {
 		res.exceptionHandler(ex, logger);
 	}

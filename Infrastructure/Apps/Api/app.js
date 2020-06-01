@@ -1,14 +1,16 @@
 const express = require('express');
 
 const coreLayer = require('../../../Core/index');
+const dataLayer = require('../../Data/index');
 
 const index = require('./routes/index');
-const customer = require('./routes/customer');
+const order = require('./routes/order');
 const subscription = require('./routes/subscription');
 
 const responseHandlerMiddleware = require('./middlewares/responseHandler');
 
 const logger = coreLayer.logger;
+const { sequelize } = dataLayer.sequelize;
 
 const app = express();
 const port = 8081;
@@ -16,8 +18,8 @@ const port = 8081;
 app.use(responseHandlerMiddleware);
 
 app.use('/', index);
-app.use('/getCustomerInfo', customer);
-app.use('/getSubscriptionOrders', subscription);
+app.use('/getCustomerInfo', subscription);
+app.use('/getSubscriptionOrders', order);
 
 app.use(function (req, res, next) {
 	logger.info({ path: req.route.path, headers: req.headers, body: req.body, params: req.params }, 'REQUEST');
@@ -26,11 +28,13 @@ app.use(function (req, res, next) {
 
 app.listen(port, async function () {
 	logger.info('Listening on port ', port);
-	// if (await mongo.connect(mongodbconnection)) {
-	// 	logger.info('MongoDB connected');
-	// } else {
-	// 	logger.error(new Error('Mongo connection failed'));
-	// }
+
+	try {
+		await sequelize.authenticate();
+		logger.info('Connection has been established successfully.');
+	} catch (error) {
+		logger.error('Unable to connect to the database:', error);
+	}
 });
 
 app.on('uncaughtException', function (req, res, route, err) {

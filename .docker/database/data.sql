@@ -1,9 +1,9 @@
 /* subscriptions */
 INSERT INTO subscriptions (subscriptionId, fullname, address, locationName, subCityName, cityName, brand, phoneNumber, distributorNumber) VALUES
-    ('abc123', 'Utku', 'şair nefi sokak', 'caferağa', 'kadiköy', 'istanbul', 'hayat', '5332858530', '2161000000'),
-    ('abc124', 'Utku', 'şair nefi sokak', 'caferağa', 'kadiköy', 'istanbul', 'sırma', '5332858530', '2161000004'),
-    ('abc125', 'Ozan', 'bahariye sokak', 'caddebostan', 'kadiköy', 'istanbul', 'erikli', '5331533630', '2161000001'),
-    ('abc126', 'Ergin', 'moda caddesi', 'göztepe', 'kadiköy', 'istanbul', 'sırma', '5332858530', '2161000002');
+    ('abc123', 'Utku', 'sair nefi sokak', 'caferaga', 'kadikoy', 'istanbul', 'hayat', '5332858530', '2161000000'),
+    ('abc124', 'Utku', 'sair nefi sokak', 'caferaga', 'kadikoy', 'istanbul', 'sirma', '5332858530', '2161000004'),
+    ('abc125', 'Ozan', 'bahariye sokak', 'caddebostan', 'kadikoy', 'istanbul', 'erikli', '5331533630', '2161000001'),
+    ('abc126', 'Ergin', 'moda caddesi', 'goztepe', 'kadikoy', 'istanbul', 'sirma', '5332858530', '2161000002');
 
 /* orders */
 INSERT INTO orders (orderId, subscriptionId, deliveryDate, paymentMethod, totalAmount, status) VALUES 

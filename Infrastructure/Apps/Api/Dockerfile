@@ -15,11 +15,11 @@ COPY ./Core/package*.json ./
 RUN npm install
 COPY ./Core/ ./
 
-# WORKDIR /usr/app/bisu/Infrastructure/Data
-# COPY ./Infrastructure/Data/package*.json ./
-# RUN npm install
-# COPY ./Infrastructure/Data/ ./
+WORKDIR /usr/app/bisu/Infrastructure/Data
+COPY ./Infrastructure/Data/package*.json ./
+RUN npm install
+COPY ./Infrastructure/Data/ ./
 
 WORKDIR /usr/app/bisu/Infrastructure/Apps/Api
-EXPOSE 8081 
+EXPOSE 8081 9231
 CMD nodemon --inspect=0.0.0.0 --nolazy --legacy-watch app.js

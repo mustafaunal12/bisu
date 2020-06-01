@@ -1,5 +1,5 @@
 {
-  "name": "core",
+  "name": "data",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,13 +8,8 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "eslint": "^4.16.0",
-    "eslint-plugin-jsdoc": "^15.9.10"
-  },
   "dependencies": {
-    "argument-required": "^1.0.4",
-    "bunyan": "^1.8.12",
-    "bunyan-elasticsearch": "^1.0.1"
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.11"
   }
 }
