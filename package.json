@@ -4,11 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "docker-compose up --build"
+    "test": "env ENVIRONMENT=test APPNAME=test ./node_modules/mocha/bin/mocha Test/**/*.js --reporter spec",
+    "start": "docker-compose up --build",
+    "build": "npm install && npm --prefix Infrastructure/Data install && npm --prefix Core install && npm --prefix Infrastructure/Apps/Api install  && npm --prefix Infrastructure/Apps/UI install"
   },
   "author": "Mustafa Ünal",
   "license": "ISC",
+  "devDependencies": {
+    "mocha": "^7.2.0"
+  },
   "dependencies": {
     "eslint": "^7.1.0",
     "eslint-plugin-jsdoc": "^26.0.0"

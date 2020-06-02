@@ -2,8 +2,7 @@ module.exports = {
 	elasticsearch: process.env.ELASTICSEARCH,
 	environment: process.env.ENVIRONMENT,
 	appName: process.env.APPNAME,
-	logger: process.env.LOGGER,
-	dblInfo: {
+	dbInfo: {
 		host: process.env.DB_HOST,
 		user: process.env.DB_USER,
 		password: process.env.DB_PASSWORD,

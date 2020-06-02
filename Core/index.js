@@ -9,7 +9,8 @@ module.exports = {
 	},
 	service: {
 		subscription: require('./services/subscription'),
-		order: require('./services/order')
+		order: require('./services/order'),
+		common: require('./services/common')
 	},
 	config: require('./config'),
 	logger: require('./logger')

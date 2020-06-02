@@ -2,7 +2,7 @@ const bunyan = require('bunyan');
 var Elasticsearch = require('bunyan-elasticsearch');
 const fs = require('fs');
 
-const { elasticsearch, logger, appName, environment } = require('./config');
+const { elasticsearch, appName, environment } = require('./config');
 
 // create logs directory if not exists.
 fs.existsSync('logs') || fs.mkdirSync('logs');
@@ -63,4 +63,4 @@ const addStream = (logger, stream) => {
 	}
 };
 
-module.exports = logger === 'file' ? fileLogger : addStream(esLogger, esStream);
+module.exports = environment === 'test' ? fileLogger : addStream(esLogger, esStream);

@@ -1,3 +1,5 @@
+const { responseCodes } = require('../resources/responseCodes');
+
 /**
  * Generates response object with success true
  * @param {*} data - Response data
@@ -13,7 +15,7 @@ const successResponse = function (data) {
  * @param {string} [responseMessage] - Response message
  * @returns {ResponseObjectError} Response object
  */
-const errorResponse = function (responseCode, responseMessage = '') {
+const errorResponse = function (responseCode = responseCodes.fatal_error, responseMessage = '') {
 	return { success: false, responseCode, responseMessage };
 };
 
