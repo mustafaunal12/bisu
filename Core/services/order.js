@@ -1,7 +1,7 @@
 const required = require('argument-required');
 
 const { responseCodes } = require('../resources/responseCodes');
-const { successResponse, errorResponse, convertToArray } = require('./common');
+const { successResponse, errorResponse } = require('./common');
 
 /**
  * Returns Get function
@@ -19,6 +19,22 @@ const get = (orderDataAccess, orderProductDataAccess) =>
 	async function (subscriptionId) {
 		required('subscriptionId')(subscriptionId);
 
+		const orders = await orderDataAccess.fetch({ subscriptionId });
+
+		const data = await Promise.all(orders.map(async order => {
+			const products = await orderProductDataAccess.fetch({ orderId: order.orderId });
+
+			order.products = products.map(item => {
+				return {
+					product: item.product,
+					quantity: item.quantity
+				};
+			});
+			
+			return order;
+		}));
+
+		return data.length > 0 ? successResponse(data) : errorResponse(responseCodes.empty_data);
 	};
 
 

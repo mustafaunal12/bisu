@@ -1,7 +1,7 @@
 /**
  * Returns new OrderProductObject
  * @param {number} orderProductId - orderProductId 
- * @param {number} orderId - orderId
+ * @param {string} orderId - orderId
  * @param {string} product - product
  * @param {number} quantity - quantity
  * @param {OrderObject} order - order

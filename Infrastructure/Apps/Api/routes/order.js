@@ -12,7 +12,7 @@ const orderService = coreLayer.service.order({ orderDataAccess, orderProductData
 router.post('/:subscriptionId', async function (req, res, next) {
 	try {
 		const response = await orderService.get(req.params.subscriptionId);
-		response.handle(response);
+		res.handle(response);
 	} catch (ex) {
 		res.exceptionHandler(ex, logger);
 	}

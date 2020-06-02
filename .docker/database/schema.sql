@@ -22,12 +22,12 @@ CREATE TABLE subscriptions (
 
 
 CREATE TABLE orders (
-    orderId INT NOT NULL,
+    orderId VARCHAR(255) NOT NULL,
     subscriptionId VARCHAR(255) NOT NULL,
     deliveryDate DATETIME NOT NULL,
     paymentMethod VARCHAR(100) NOT NULL,
     totalAmount DECIMAL(13,2) NOT NULL,
-    status INT NOT NULL,
+    status VARCHAR(50) NOT NULL,
     PRIMARY KEY (orderId),
     FOREIGN KEY (subscriptionId) REFERENCES subscriptions (subscriptionId)
 );
@@ -35,7 +35,7 @@ CREATE TABLE orders (
 
 CREATE TABLE orderProducts (
     orderProductId INT NOT NULL AUTO_INCREMENT,
-    orderId INT NOT NULL,
+    orderId VARCHAR(255) NOT NULL,
     product VARCHAR(255) NOT NULL,
     quantity INT NOT NULL,
     PRIMARY KEY (orderProductId),

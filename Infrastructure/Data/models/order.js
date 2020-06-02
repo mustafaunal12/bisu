@@ -7,7 +7,7 @@ const Order = coreLayer.domain.order;
 
 const OrderSchema = sequelize.define('order', {
     orderId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true
     },
@@ -31,7 +31,7 @@ const OrderSchema = sequelize.define('order', {
         allowNull: false
     },
     status: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     }
 }, {

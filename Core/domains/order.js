@@ -1,16 +1,15 @@
 /**
  * Returns new order object
- * @param {number} orderId - orderId 
+ * @param {string} orderId - orderId 
  * @param {string} subscriptionId - subscriptionId 
  * @param {Date} deliveryDate - deliveryDate
  * @param {string} paymentMethod - paymentMethod
  * @param {number} totalAmount - totalAmount
- * @param {number} status - status
- * @param {SubscriptionObject} subscription - subscription
+ * @param {string} status - status
  * @param {[OrderProductObject]} products - products
  * @returns {OrderObject} - Order object
  */
-function Order(orderId, subscriptionId, deliveryDate, paymentMethod, totalAmount, status, subscription, products = []) {
+function Order(orderId, subscriptionId, deliveryDate, paymentMethod, totalAmount, status, products = []) {
 	return {
 		orderId,
 		subscriptionId,
@@ -18,7 +17,6 @@ function Order(orderId, subscriptionId, deliveryDate, paymentMethod, totalAmount
 		paymentMethod,
 		totalAmount,
 		status,
-		subscription,
 		products
 	};
 }

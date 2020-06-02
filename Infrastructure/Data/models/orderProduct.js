@@ -12,7 +12,7 @@ const OrderProductSchema = sequelize.define('orderProduct', {
         primaryKey: true
     },
     orderId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         references: {
             model: OrderSchema,
             key: 'orderId'

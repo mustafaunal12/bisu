@@ -1,7 +1,7 @@
 const responseCodes = {
 	success: 200,
 	fatal_error: 500,
-	invalid_phonenumber: 403
+	empty_data: 403
 };
 
 const responseCodeDescriptions = {

@@ -20,7 +20,7 @@ const get = (subscriptionDataAccess) =>
 
 		const data = await subscriptionDataAccess.fetch({ phoneNumber });
 
-		return data.length > 0 ? successResponse(data) : errorResponse(responseCodes.invalid_phonenumber);
+		return data.length > 0 ? successResponse(data) : errorResponse(responseCodes.empty_data);
 	};
 
 

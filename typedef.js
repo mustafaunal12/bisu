@@ -19,15 +19,6 @@
  */
 
 /**
- * @typedef DataAccess
- * @type {object}
- * @property {(entities: any) => Promise<any>} save
- * @property {(condition: any) => Promise<boolean>} remove
- * @property {(query: any) => Promise<any>} fetch
- * @property {(model: any) => any} domainConvertor
- */
-
-/**
  * @typedef SubscriptionObject
  * @type {object}
  * @property {string} subscriptionId
