@@ -1,0 +1,57 @@
+definitions:
+  ResponseCodes:
+    type: string
+    example:
+      200: Başarılı
+      403: Belirtilen telefona ait kayıt bulunamamıştır.
+      500: Sunucu hatası. Lütfen tekrar deneyin.
+  Order:
+    type: object
+    properties:
+      subscriptionId:
+        type: string
+      orderId:
+        type: string
+      deliveryDate:
+        type: string
+      paymentMethod:
+        type: string
+      totalAmount:
+        type: number
+      status:
+        type: string
+      products:
+        type: array
+        items:
+          $ref: "#/definitions/Product"
+  Product:
+    type: object
+    properties:
+      productName:
+        type: string
+      quantity:
+        type: number
+  Subscription:
+    type: object
+    properties:
+      subscriptionId: 
+        type: string
+      fullname:
+        type: string
+      address: 
+        type: string
+      locationName:
+        type: string
+      subCityName:
+        type: string
+      cityName:
+        type: string
+      brand:
+        type: string
+      phoneNumber:
+        type: string
+      distributorNumber:
+        type: string
+
+
+    

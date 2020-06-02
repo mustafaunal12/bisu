@@ -1,0 +1,25 @@
+paths:
+  /getCustomerInfo/{phoneNumber}:
+    post:
+      tags:
+        - subscription
+      description: Returns all subscriptions by given phone number
+      produces:
+        - application/json
+      parameters:
+        - name: phoneNumber
+          in: path
+          description: User phone number
+          required: true
+          type: string
+      responses:
+        403:
+          description: Belirtilen telefona ait kayıt bulunamamıştır.
+        500:
+          description: Sunucu hatası. Lütfen tekrar deneyin.
+        200:
+          description: Başarılı
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Subscription"

@@ -1,0 +1,25 @@
+paths:
+  /getSubscriptionOrders/{subscriptionId}:
+    post:
+      tags:
+        - order
+      description: Returns all orders by given subscriptionId
+      produces:
+        - application/json
+      parameters:
+        - name: subscriptionId
+          in: path
+          description: Subscription id
+          required: true
+          type: string
+      responses:
+        403:
+          description: Belirtilen telefona ait kayıt bulunamamıştır.
+        500:
+          description: Sunucu hatası. Lütfen tekrar deneyin.
+        200:
+          description: Başarılı
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Order"

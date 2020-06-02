@@ -1,5 +1,8 @@
 const express = require('express');
 
+const swaggerSpec = require('./swagger');
+const swaggerUi = require('swagger-ui-express');
+
 const coreLayer = require('../../../Core/index');
 const dataLayer = require('../../Data/index');
 
@@ -21,8 +24,12 @@ app.use('/', index);
 app.use('/getCustomerInfo', subscription);
 app.use('/getSubscriptionOrders', order);
 
+// Swagger UI
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Logs all requests
 app.use(function (req, res, next) {
-	logger.info({ path: req.route.path, headers: req.headers, body: req.body, params: req.params }, 'REQUEST');
+	logger.info({ path: req.route ? req.route.path : 'unhandled route', headers: req.headers, body: req.body, params: req.params }, 'REQUEST');
 	next();
 });
 
