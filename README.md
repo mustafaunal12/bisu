@@ -22,7 +22,8 @@ elasticsearch => http://localhost:9200/
 kibana => http://localhost:5601/
 ```
 
-[https://docs.docker.com/docker-for-mac/install](https://docs.docker.com/docker-for-mac/install/)
+[https://docs.docker.com/docker-for-mac/install](https://docs.docker.com/docker-for-mac/install/)  
+
 
 ## run
 
@@ -31,6 +32,14 @@ npm start
 ```
 
 İlk defa çalıştırıldığında makinenin performansına ve internet bağlantısına bağlı olarak docker image'larının yüklenmesi ve kurulması zaman alabilir. Daha sonraki çalıştırmalarda local'den kullanılacağından daha hızlı olacaktır.   
+
+## build
+
+```bash
+npm run build 
+```
+
+Proje genelinde ihtiyaç duyulan tüm npm paketlerini yükler. test ve coverage scriptlerinin çalışabilmesi için öncesinde bu komutun çalıştırılması gerekir. 
 
 ## test 
 
