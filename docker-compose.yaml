@@ -75,17 +75,19 @@ services:
       - mysql
       - elasticsearch
       - kibana
-  # ui:
-  #   restart: always
-  #   image: ui
-  #   build:
-  #     context: ./
-  #     dockerfile: Infrastructure/Apps/UI/Dockerfile
-  #   container_name: ui
-  #   networks:
-  #     - bisu
-  #   ports:
-  #     - 8080:80
+  ui:
+    restart: always
+    image: ui
+    build:
+      context: ./
+      dockerfile: Infrastructure/Apps/UI/Dockerfile
+    container_name: ui
+    networks:
+      - bisu
+    ports:
+      - 8080:80
+    depends_on: 
+      - api
 networks:
   bisu:
     name: bisu-network
