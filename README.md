@@ -8,6 +8,8 @@ Proje 'Onion Architecture' mimarisine uygun geliştirilmiştir. Merkezinde domai
 
 Log'lar için elasticsearch ve kibana arayüzü kullanılmıştır. 
 
+Api için hazırlanan swagger dokümantasyonu : http://localhost:8081/swagger
+
 ## docker
 
 Proje 5 farklı container olacak şekilde dockerize edilmiş olup, local environmenttan bağımsız çalıştırılabilmektedir. Projenin çalıştırılacağı makinede docker kurulu olmalıdır.  
