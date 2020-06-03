@@ -10,8 +10,8 @@ import { retry, catchError } from 'rxjs/operators';
 
 export class DataService {
 
-  private getCustomerInfoUrl = (phoneNumber) => `http://api/getCustomerInfo/${phoneNumber}`;
-  private getSubscriptionOrdersUrl = (subscriptionId) => `http://api/getSubscriptionOrders/${subscriptionId}`;
+  private getCustomerInfoUrl = (phoneNumber) => `http://localhost:8081/getCustomerInfo/${phoneNumber}`;
+  private getSubscriptionOrdersUrl = (subscriptionId) => `http://localhost:8081/getSubscriptionOrders/${subscriptionId}`;
 
   constructor(private httpClient: HttpClient) { }
 

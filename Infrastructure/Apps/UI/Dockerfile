@@ -18,7 +18,7 @@ FROM nginx:alpine
 
 COPY ./Infrastructure/Apps/UI/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=compile-image /opt/ng/dist/UI /usr/share/nginx/html
+COPY --from=compile-image /opt/ng/dist/bisu /usr/share/nginx/html
 
 EXPOSE 80
 
