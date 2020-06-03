@@ -4,14 +4,17 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "env ENVIRONMENT=test APPNAME=test ./node_modules/mocha/bin/mocha Test/**/*.js --reporter spec",
+    "test": "env ENVIRONMENT=test APPNAME=test mocha Test/**/*.js --reporter spec",
     "start": "docker-compose up --build",
-    "build": "npm install && npm --prefix Infrastructure/Data install && npm --prefix Core install && npm --prefix Infrastructure/Apps/Api install  && npm --prefix Infrastructure/Apps/UI install"
+    "build": "npm install && npm --prefix Infrastructure/Data install && npm --prefix Core install && npm --prefix Infrastructure/Apps/Api install  && npm --prefix Infrastructure/Apps/UI install",
+    "coverage": "nyc npm run test"
   },
   "author": "Mustafa Ünal",
   "license": "ISC",
   "devDependencies": {
-    "mocha": "^7.2.0"
+    "mocha": "^7.2.0",
+    "nyc": "^15.0.0",
+    "mocha-junit-reporter": "^1.23.3"
   },
   "dependencies": {
     "eslint": "^7.1.0",
