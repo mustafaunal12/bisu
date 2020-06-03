@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const swaggerSpec = require('./swagger');
 const swaggerUi = require('swagger-ui-express');
@@ -19,6 +20,7 @@ const app = express();
 const port = 8081;
 
 app.use(responseHandlerMiddleware);
+app.use(cors());
 
 app.use('/', index);
 app.use('/getCustomerInfo', subscription);
